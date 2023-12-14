@@ -1,7 +1,3 @@
-import {
-  openImagePopup
-} from '../scripts/index'
-
 const cardsTemplate = document.querySelector('#card-template').content;
 const containerCard = document.querySelector('.places__list');
 
@@ -10,6 +6,7 @@ function createCard(cardData, deleteCallback, likeCardCallback, imageClickCallba
 
   cardElement.querySelector('.card__title').textContent = cardData.name;
   cardElement.querySelector('.card__image').src = cardData.link;
+  cardElement.querySelector('.card__image').alt = cardData.name;
 
   cardElement.querySelector('.card__delete-button').addEventListener('click', (e) => {
     deleteCallback(e.target);
@@ -20,10 +17,7 @@ function createCard(cardData, deleteCallback, likeCardCallback, imageClickCallba
     likeCardCallback(likeButton);
   });
 
-  const imageElement = cardElement.querySelector('.card__image');
-  imageElement.src = cardData.link;
-  imageElement.textContent = cardData.name;
-  imageElement.addEventListener('click', () => imageClickCallback(cardData.link, cardData.name));
+  cardElement.addEventListener('click', () => imageClickCallback(cardData.link, cardData.name, cardData.name));
 
   return cardElement;
 }
@@ -32,18 +26,14 @@ function likeCard(btn) {
   btn.classList.toggle('card__like-button_is-active');
 }
 
-function renderCards(cardsData, deleteCallback) {
-  cardsData.forEach(cardData => {
-    let cardElement = createCard(cardData, deleteCallback, likeCard, openImagePopup);
-    containerCard.append(cardElement);
-  });
-
-  return containerCard;
+function deleteCard(cardElement) {
+  const cardItem = cardElement.closest('.places__item');
+  cardItem.remove();
 }
 
 export {
-  renderCards,
   likeCard,
   createCard,
-  containerCard
+  containerCard,
+  deleteCard
 }
