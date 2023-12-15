@@ -33,8 +33,8 @@ const jobInput = document.querySelector('.popup__input_type_description');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 
-const cardNameInput = popupCard.querySelector('.popup__input_type_card-name').value;
-const urlInput = popupCard.querySelector('.popup__input_type_url').value;
+const cardNameInput = popupCard.querySelector('.popup__input_type_card-name');
+const urlInput = popupCard.querySelector('.popup__input_type_url');
 
 popupProfileButton.addEventListener('click', () => {
   nameInput.value = profileTitle.textContent;
