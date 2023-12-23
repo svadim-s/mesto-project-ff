@@ -92,11 +92,11 @@ function handleProfileFormSubmit(evt) {
     .then(res => {
       profileTitle.textContent = res.name;
       profileDescription.textContent = res.about;
+
+      closePopup(profileForm.closest('.popup'));
     })
     .catch(err => console.log(err))
     .finally(() => renderSaving(false, popupProfile.querySelector('.popup__button')));
-
-  closePopup(profileForm.closest('.popup'));
 }
 
 profileForm.addEventListener('submit', handleProfileFormSubmit);

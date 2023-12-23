@@ -6,30 +6,26 @@ const config = {
   }
 }
 
+const handleApiResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+
+  return Promise.reject(`Ошибка: ${res.status}`);
+};
+
 const getUserData = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "GET",
     headers: config.headers
-  }).then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  }).then((res) => handleApiResponse(res))
 }
 
 const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     method: "GET",
     headers: config.headers
-  }).then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  }).then((res) => handleApiResponse(res))
 }
 
 const editProfile = (profileName, profileJob) => {
@@ -40,13 +36,7 @@ const editProfile = (profileName, profileJob) => {
       name: profileName,
       about: profileJob
     })
-  }).then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  }).then((res) => handleApiResponse(res))
 }
 
 const editProfileImage = (profileAvatar) => {
@@ -56,13 +46,7 @@ const editProfileImage = (profileAvatar) => {
     body: JSON.stringify({
       avatar: profileAvatar
     })
-  }).then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  }).then((res) => handleApiResponse(res))
 }
 
 const addNewCard = (cardName, cardLink) => {
@@ -73,52 +57,28 @@ const addNewCard = (cardName, cardLink) => {
       name: cardName,
       link: cardLink
     })
-  }).then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
+  }).then((res) => handleApiResponse(res))
 }
 
 const putLikeCard = (cardId) => {
   return fetch(config.baseUrl + `/cards/likes/${cardId}`, {
     method: "PUT",
     headers: config.headers
-  }).then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  }).then((res) => handleApiResponse(res))
 }
 
 const deleteLikeCard = (cardId) => {
   return fetch(config.baseUrl + `/cards/likes/${cardId}`, {
     method: "DELETE",
     headers: config.headers
-  }).then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  }).then((res) => handleApiResponse(res))
 }
 
 const deleteCard = (cardId) => {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers
-  }).then(res => {
-    if (res.ok) {
-      return res.json();
-    }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
-  });
+  }).then((res) => handleApiResponse(res))
 }
 
 export {
