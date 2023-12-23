@@ -81,6 +81,5 @@ const enableValidation = (validationConfig) => {
 
 export {
   clearValidation,
-  toggleButtonState,
   enableValidation
 }
